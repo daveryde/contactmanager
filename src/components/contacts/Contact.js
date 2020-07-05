@@ -7,21 +7,20 @@ const Contact = ({ contact }) => {
   const { deleteContact } = useContext(ContactContext);
   const [isShowing, setShowing] = useState(false);
 
+  // Delete contact
   const onDeleteClick = async (id) => {
     deleteContact(id);
   };
 
+  // Destructure values from contact obj
   const { id, name, email, phone } = contact;
+
   return (
     <div className="card card-body mb-3">
       <h4>
         {name}{' '}
         <i
-          onClick={() =>
-            setShowing(
-              !isShowing
-            )
-          }
+          onClick={() => setShowing(!isShowing)}
           className="fas fa-sort-down"
           style={{ cursor: 'pointer' }}
         />
@@ -52,7 +51,7 @@ const Contact = ({ contact }) => {
   )
 }
 
-
+// Data type check
 Contact.propTypes = {
   contact: PropTypes.object.isRequired
 };
