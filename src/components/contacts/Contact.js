@@ -2,20 +2,13 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ContactContext } from '../../context/ContactState';
-import axios from 'axios';
 
 const Contact = ({ contact }) => {
-  // const { contacts } = useContext(ContactContext);
+  const { deleteContact } = useContext(ContactContext);
   const [isShowing, setShowing] = useState(false);
 
   const onDeleteClick = async (id) => {
-    try {
-      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
-
-      // dispatch({ type: 'DELETE_CONTACT', payload: id });
-    } catch (e) {
-      // dispatch({ type: 'DELETE_CONTACT', payload: id });
-    }
+    deleteContact(id);
   };
 
   const { id, name, email, phone } = contact;
@@ -35,7 +28,7 @@ const Contact = ({ contact }) => {
         <i
           className="fas fa-times"
           style={{ cursor: 'pointer', float: 'right', color: 'red' }}
-          // onClick={this.onDeleteClick.bind(this, id, dispatch)}
+          onClick={() => onDeleteClick(id)}
         />
         <Link to={`contact/edit/${id}`}>
           <i
