@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import ContactReducer from './ContactReducer';
 import axios from 'axios';
 
@@ -12,6 +12,11 @@ export const ContactContext = createContext(initialState);
 export const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ContactReducer, initialState);
 
+  // Get contacts on render
+  useEffect(() => {
+    getContacts();
+  }, [])
+
   // Get contacts
   const getContacts = async () => {
     const res = await axios.get('https://jsonplaceholder.typicode.com/users');
@@ -20,8 +25,11 @@ export const StateProvider = ({ children }) => {
   }
 
   // Add contact
-  const addContact = () => {
+  const addContact = async (contact) => {
+    const res = await axios.post(
+      'https://jsonplaceholder.typicode.com/users', contact);
 
+    dispatch({ type: 'ADD_CONTACT', payload: contact})
   }
 
   // Update contact

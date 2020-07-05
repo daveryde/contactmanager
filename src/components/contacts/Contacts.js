@@ -3,12 +3,7 @@ import Contact from './Contact';
 import { ContactContext } from '../../context/ContactState';
 
 const Contacts = () => {
-  const { contacts, getContacts } = useContext(ContactContext);
-
-  // Get contacts on render
-  useEffect(() => {
-    getContacts();
-  }, [])
+  const { contacts } = useContext(ContactContext);
 
   return (
     <>
