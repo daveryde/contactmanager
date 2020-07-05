@@ -27,6 +27,11 @@ export default (state, action) => {
           contact => contact.id !== action.payload
         )
       };
+    case 'CONTACTS_ERROR':
+      return {
+        ...state,
+        errors: action.payload
+      }
     default:
       return state;
   }
