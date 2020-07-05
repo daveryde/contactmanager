@@ -1,115 +1,110 @@
-import React, { Component } from 'react';
-import { Consumer } from '../../context';
-import TextInputGroup from '../layout/TextInputGroup';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
+import { useHistory } from "react-router-dom";
+import { ContactContext } from '../../context/ContactState';
 
-class AddContact extends Component {
-  state = {
+// Helper component
+import TextInputGroup from '../layout/TextInputGroup';
+
+const AddContact = () => {
+  const { addContact, errors } = useContext(ContactContext);
+  const [contact, setContact] = useState({
     name: '',
     email: '',
     phone: '',
     errors: {}
-  };
+  });
 
-  onSubmit = async (dispatch, e) => {
+  // History hook
+  let history = useHistory();
+
+  // Destructure values from component state
+  const { name, email, phone } = contact;
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-
-    const { name, email, phone } = this.state;
 
     // Check For Errors
     if (name === '') {
-      this.setState({
+      setContact({
         errors: { name: 'Name is required' }
       });
       return;
     }
 
     if (email === '') {
-      this.setState({ errors: { email: 'Email is required' } });
+      setContact({ errors: { email: 'Email is required' } });
       return;
     }
 
     if (phone === '') {
-      this.setState({ errors: { phone: 'Phone is required' } });
+      setContact({ errors: { phone: 'Phone is required' } });
       return;
     }
 
+    // New contact obj with component state
     const newContact = {
       name,
       email,
       phone
     };
 
-    const res = await axios.post(
-      'https://jsonplaceholder.typicode.com/users',
-      newContact
-    );
+    // Add new contact to context
+    addContact(newContact);
 
-    dispatch({ type: 'ADD_CONTACT', payload: res.data });
-
-    // Clear State
-    this.setState({
+    // Clear component state
+    setContact({
       name: '',
       email: '',
       phone: '',
       errors: {}
     });
 
-    this.props.history.push('/');
+    // Return to contacts list after contact added to context
+    history.push('/');
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  // Update component state onchange
+  const onChange = e => setContact({ ...contact, [e.target.name]: e.target.value });
 
-  render() {
-    const { name, email, phone, errors } = this.state;
-
-    return (
-      <Consumer>
-        {value => {
-          const { dispatch } = value;
-          return (
-            <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Name"
-                    name="name"
-                    placeholder="Enter Name"
-                    value={name}
-                    onChange={this.onChange}
-                    errors={errors.name}
-                  />
-                  <TextInputGroup
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={this.onChange}
-                    error={errors.email}
-                  />
-                  <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    placeholder="Enter Phone"
-                    value={phone}
-                    onChange={this.onChange}
-                    errors={errors}
-                  />
-                  <input
-                    type="submit"
-                    value="Add Contact"
-                    className="btn btn-light btn-block"
-                  />
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
-    );
-  }
+  return (
+    <div className="card mb-3">
+      <div className="card-header">Add Contact</div>
+      <div className="card-body">
+        <form onSubmit={onSubmit}>
+          <TextInputGroup
+            label="Name"
+            name="name"
+            placeholder="Enter Name"
+            value={name}
+            onChange={(e) => onChange(e)}
+            errors={errors}
+          />
+          <TextInputGroup
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => onChange(e)}
+            error={errors}
+          />
+          <TextInputGroup
+            label="Phone"
+            name="phone"
+            placeholder="Enter Phone"
+            value={phone}
+            onChange={(e) => onChange(e)}
+            errors={errors}
+          />
+          <input
+            type="submit"
+            value="Add Contact"
+            className="btn btn-light btn-block"
+          />
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default AddContact;
