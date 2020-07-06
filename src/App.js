@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Components
 import Contacts from './components/contacts/Contacts';
 import AddContact from './components/contacts/AddContact';
 import EditContact from './components/contacts/EditContact';
 import Header from './components/layout/Header';
 import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
-import Test from './components/test/Test';
+// import Test from './components/test/Test';
 
+// Contact State
 import { StateProvider } from './context/ContactState';
 
+// Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -26,7 +30,7 @@ class App extends Component {
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/edit/:id" component={EditContact} />
                 <Route exact path="/about" component={About} />
-                <Route exact path="/test" component={Test} />
+                {/* <Route exact path="/test" component={Test} /> */}
                 <Route component={NotFound} />
               </Switch>
             </div>
