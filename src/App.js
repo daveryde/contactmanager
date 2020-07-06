@@ -11,7 +11,7 @@ import NotFound from './components/pages/NotFound';
 // import Test from './components/test/Test';
 
 // Contact State
-import { StateProvider } from './context/ContactState';
+import { StateProvider } from './context/contact/ContactState';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';

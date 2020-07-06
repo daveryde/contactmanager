@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ContactContext } from '../../context/ContactState';
+
+// Context
+import ContactContext from '../../context/contact/ContactContext';
 
 const Contact = ({ contact }) => {
   const { deleteContact, setCurrent } = useContext(ContactContext);

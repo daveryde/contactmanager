@@ -1,6 +1,10 @@
 import React, { useEffect, useContext } from 'react';
+
+// Context
+import ContactContext from '../../context/contact/ContactContext';
+
+// Child component
 import Contact from './Contact';
-import { ContactContext } from '../../context/ContactState';
 
 const Contacts = () => {
   const { contacts } = useContext(ContactContext);

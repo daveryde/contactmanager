@@ -1,14 +1,16 @@
-import React, { createContext, useEffect, useReducer } from 'react';
-import ContactReducer from './ContactReducer';
+import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 
+// Context / Reducer
+import ContactContext from './ContactContext';
+import ContactReducer from './ContactReducer';
+
+// Initial state
 const initialState = {
   contacts: [],
   contact: null,
   errors: null
 };
-
-export const ContactContext = createContext(initialState);
 
 export const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ContactReducer, initialState);

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ContactContext } from '../../context/ContactState';
+
+// Context
+import ContactContext from '../../context/contact/ContactContext';
+
+// Helper component
 import TextInputGroup from '../layout/TextInputGroup';
 
 const EditContact = () => {
