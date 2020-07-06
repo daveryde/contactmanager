@@ -1,5 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
+    case 'GET_CONTACT':
+      return {
+        ...state,
+        contact: action.payload
+      }
     case 'GET_CONTACTS':
       return {
         ...state,
@@ -13,11 +18,10 @@ export default (state, action) => {
     case 'UPDATE_CONTACT':
       return {
         ...state,
-        contacts: state.contacts.map(
-          contact =>
-            contact.id === action.payload.id
-              ? (contact = action.payload)
-              : contact
+        contacts: state.contacts.map(contact =>
+          contact.id === action.payload.id
+            ? (contact = action.payload)
+            : contact
         )
       };
     case 'DELETE_CONTACT':
@@ -27,11 +31,21 @@ export default (state, action) => {
           contact => contact.id !== action.payload
         )
       };
+    case 'SET_CURRENT':
+      return {
+        ...state,
+        contact: action.payload
+      };
+    case 'CLEAR_CURRENT':
+      return {
+        ...state,
+        contact: null
+      }
     case 'CONTACTS_ERROR':
       return {
         ...state,
         errors: action.payload
-      }
+      };
     default:
       return state;
   }
