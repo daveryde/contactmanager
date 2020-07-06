@@ -1,47 +1,40 @@
-import React, { Component } from 'react';
+// import React, { useState, useEffect, useContext } from 'react';
+// import { ContactsContext } from '../../context/ContactsContext'
 
-class Test extends Component {
-  state = {
-    title: '',
-    body: ''
-  };
+// const Test = () => {
+//   const { dispatch } = useContext(ContactsContext);
+//   const [test, setTest] = useState({
+//     title: '',
+//     body: ''
+//   });
 
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          title: data.title,
-          body: data.body
-        })
-      );
-  }
+//   useEffect(() => {
+//     fetch('https://jsonplaceholder.typicode.com/todos/1')
+//       .then(response => response.json())
+//       .then(data =>
+//         setTest({
+//           title: data.title,
+//           body: data.body
+//         })
+//       );
+//   }, [test]);
 
-  // componentWillMount() {
-  //   console.log('ComponentWillMount...');
-  // }
+//   dispatch({
+//     type: 'ADD', payload: {
+//       name: '',
+//       email: '',
+//       phone: '',
+//     }
+//   })
 
-  // componentDidUpdate() {
-  //   console.log('ComponentDidUpdate...');
-  // }
+//   const { title, body } = test;
 
-  // componentWillUpdate() {
-  //   console.log('ComponentWillUpdate...');
-  // }
+//   return (
+//     <div>
+//       <h1>{title}</h1>
+//       <p>{body}</p>
+//     </div>
+//   );
+// }
 
-  // componentWillReceiveProps(nextProps, nextState) {
-  //   console.log('componenetWillReceiveProps');
-  // }
-
-  render() {
-    const { title, body } = this.state;
-    return (
-      <div>
-        <h1>{title}</h1>
-        <p>{body}</p>
-      </div>
-    );
-  }
-}
-
-export default Test;
+// export default Test;
