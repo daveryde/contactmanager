@@ -38,6 +38,7 @@ Header.defaultProps = {
   branding: 'My App'
 };
 
+// Prop data type check
 Header.propTypes = {
   branding: PropTypes.string.isRequired
 };
