@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ContactContext } from '../../context/ContactState';
 
 const Contact = ({ contact }) => {
-  const { deleteContact } = useContext(ContactContext);
+  const { deleteContact, setCurrent } = useContext(ContactContext);
   const [isShowing, setShowing] = useState(false);
 
   // Delete contact
@@ -38,6 +38,7 @@ const Contact = ({ contact }) => {
               color: 'black',
               marginRight: '1rem'
             }}
+            onClick={() => setCurrent(contact)}
           />
         </Link>
       </h4>
