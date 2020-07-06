@@ -1,40 +1,44 @@
 export default (state, action) => {
-  switch (action.type) {
+  // Destructure values from param
+  const { contacts } = state;
+  const { type, payload } = action;
+
+  switch (type) {
     case 'GET_CONTACT':
       return {
         ...state,
-        contact: action.payload
+        contact: payload
       }
     case 'GET_CONTACTS':
       return {
         ...state,
-        contacts: action.payload
+        contacts: payload
       }
     case 'ADD_CONTACT':
       return {
         ...state,
-        contacts: [action.payload, ...state.contacts]
+        contacts: [payload, ...contacts]
       };
     case 'UPDATE_CONTACT':
       return {
         ...state,
-        contacts: state.contacts.map(contact =>
-          contact.id === action.payload.id
-            ? (contact = action.payload)
+        contacts: contacts.map(contact =>
+          contact.id === payload.id
+            ? (contact = payload)
             : contact
         )
       };
     case 'DELETE_CONTACT':
       return {
         ...state,
-        contacts: state.contacts.filter(
-          contact => contact.id !== action.payload
+        contacts: contacts.filter(
+          contact => contact.id !== payload
         )
       };
     case 'SET_CURRENT':
       return {
         ...state,
-        contact: action.payload
+        contact: payload
       };
     case 'CLEAR_CURRENT':
       return {
@@ -44,7 +48,7 @@ export default (state, action) => {
     case 'CONTACTS_ERROR':
       return {
         ...state,
-        errors: action.payload
+        errors: payload
       };
     default:
       return state;
