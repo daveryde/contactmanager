@@ -29,6 +29,7 @@ const TextInputGroup = ({
   );
 };
 
+// Prop data type check
 TextInputGroup.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
