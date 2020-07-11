@@ -10,9 +10,6 @@ import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
 // import Test from './components/test/Test';
 
-// Contact State
-import { StateProvider } from './context/contact/ContactState';
-
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -20,7 +17,6 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <StateProvider>
         <Router>
           <div className="App">
             <Header branding="Contact Manager" />
@@ -36,7 +32,6 @@ class App extends Component {
             </div>
           </div>
         </Router>
-      </StateProvider>
     );
   }
 }
