@@ -30,7 +30,7 @@ export const StateProvider = ({ children }) => {
   // Get contacts on render
   useEffect(() => {
     getContacts();
-  }, [])
+  }, []);
 
   // Get contact
   const getContact = async (id) => {
@@ -38,7 +38,10 @@ export const StateProvider = ({ children }) => {
       `https://jsonplaceholder.typicode.com/users/${id}`
     );
 
-    dispatch({ type: GET_CONTACT, payload: res.data })
+    dispatch({
+      type: GET_CONTACT,
+      payload: res.data
+    });
   }
 
   // Get contacts
@@ -46,21 +49,35 @@ export const StateProvider = ({ children }) => {
     const res = await axios.get('https://jsonplaceholder.typicode.com/users');
 
     try {
-      dispatch({ type: GET_CONTACTS, payload: res.data });
+      dispatch({
+        type: GET_CONTACTS,
+        payload: res.data
+      });
     } catch (err) {
-      dispatch({ type: CONTACTS_ERROR, payload: err.response.data.error });
+      dispatch({
+        type: CONTACTS_ERROR,
+        payload: err.response.data.error
+      });
     }
   }
 
   // Add contact
   const addContact = async (contact) => {
     await axios.post(
-      'https://jsonplaceholder.typicode.com/users', contact);
+      'https://jsonplaceholder.typicode.com/users',
+      contact
+    );
 
     try {
-      dispatch({ type: ADD_CONTACT, payload: contact })
+      dispatch({
+        type: ADD_CONTACT,
+        payload: contact
+      });
     } catch (err) {
-      dispatch({ type: CONTACTS_ERROR, payload: err.response.data.error });
+      dispatch({
+        type: CONTACTS_ERROR,
+        payload: err.response.data.error
+      });
     }
   }
 
@@ -73,35 +90,59 @@ export const StateProvider = ({ children }) => {
         }
       }
 
-      const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${contact.id}`, contact, config)
+      const res = await axios.put(
+        `https://jsonplaceholder.typicode.com/users/${contact.id}`,
+        contact,
+        config
+      );
 
-      dispatch({ type: UPDATE_CONTACT, payload: res.data })
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data
+      });
     } catch (err) {
-      dispatch({ type: CONTACTS_ERROR, payload: err.response.data.error })
+      dispatch({
+        type: CONTACTS_ERROR,
+        payload: err.response.data.error
+      });
     }
   }
 
   // Delete contact
   const deleteContact = (id) => {
     try {
-      dispatch({ type: DELETE_CONTACT, payload: id })
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: id
+      })
     } catch (err) {
-      dispatch({ type: CONTACTS_ERROR, payload: err.response.data.error });
+      dispatch({
+        type: CONTACTS_ERROR,
+        payload: err.response.data.error
+      });
     }
   }
 
   // Set current contact
   const setCurrent = async (contact) => {
     try {
-      dispatch({ type: SET_CURRENT, payload: contact })
+      dispatch({
+        type: SET_CURRENT,
+        payload: contact
+      })
     } catch (err) {
-      dispatch({ type: CONTACTS_ERROR, payload: err.response.data.error });
+      dispatch({
+        type: CONTACTS_ERROR,
+        payload: err.response.data.error
+      });
     }
   }
 
   // Clear current contact
   const clearCurrent = async () => {
-    dispatch({ type: CLEAR_CURRENT })
+    dispatch({
+      type: CLEAR_CURRENT
+    });
   }
 
   return (
